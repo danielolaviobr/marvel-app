@@ -1,6 +1,14 @@
+import axios, { AxiosInstance } from "axios";
 import { useRouter } from "next/router";
 import React, { useCallback, useEffect, useState } from "react";
-import api from "../_api";
+
+// export async function getStaticProps() {
+//   const url = process.env.ENV_URL;
+//   console.log(url);
+//   //   return {
+//   //     props: { url },
+//   //   };
+// }
 
 interface CharacterProps {
   id: number;
@@ -11,8 +19,8 @@ const Character: React.FC<CharacterProps> = () => {
   const router = useRouter();
 
   const fetchCharacterData = useCallback(async (id: string) => {
-    console.log(id);
-    const response = await api.get(`characters/${id}`);
+    const url = process.env.NEXT_PUBLIC_ENV_URL;
+    const response = await axios.get(`${url}api/characters/${id}`);
 
     setCharacter(response.data.results[0]);
   }, []);

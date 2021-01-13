@@ -1,23 +1,21 @@
 import React, { useCallback, useEffect, useState } from "react";
-import api from "../_api";
 import CharacterCard from "../../components/CharacterCard";
 import { InferGetStaticPropsType } from "next";
 import { useRouter } from "next/router";
 import CharactersSkeletons from "../../components/CharactersSkeletons";
-// import { Button, Link } from "@chakra-ui/react";
 import Link from "next/link";
-import characters from "../api/characters";
+import axios, { AxiosInstance } from "axios";
 
-// export async function getStaticProps({ query: { page } }) {
-//   console.log(page);
-//   const response = await api.get("characters");
+// export async function getStaticProps() {
+//   const url = process.env.API_URL;
+//   const api = axios.create({ baseURL: url });
 //   return {
-//     props: { data: response.data },
+//     props: { api },
 //   };
 // }
 
-// interface CharactersProps {
-//   data: object;
+// interface CharacterProps {
+//   api: AxiosInstance;
 // }
 
 const Characters: React.FC = () => {
@@ -28,8 +26,8 @@ const Characters: React.FC = () => {
   const { page } = router.query;
 
   const fetchCharactersData = async (page = 1) => {
-    console.log(currentPage);
-    const response = await api.get("characters", {
+    const url = process.env.NEXT_PUBLIC_ENV_URL;
+    const response = await axios.get(`${url}api/characters`, {
       params: { page },
     });
     setCharacters(response.data.results);
@@ -53,7 +51,7 @@ const Characters: React.FC = () => {
   return (
     <>
       <div className="flex flex-wrap justify-center">
-        {!isLoading ? (
+        {!isLoading && characters ? (
           characters.map((character) => (
             <CharacterCard
               key={character.id}
