@@ -51,7 +51,7 @@ const Characters: React.FC = () => {
     <>
       <Head>
         <title>{"Marvel - Herois & Quadrinhos"}</title>
-        <link rel="shortcut icon" href="/favicon.ico" />
+        <link rel="shortcut icon" href="/favico.ico" />
         <meta
           name="description"
           content="Aqui você encontra todas as informações sobre seus herois favoritos"

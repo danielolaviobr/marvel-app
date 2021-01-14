@@ -39,7 +39,7 @@ const Comics: React.FC = () => {
     <>
       <Head>
         <title>{"Marvel - Herois & Quadrinhos"}</title>
-        <link rel="shortcut icon" href="/favicon.ico" />
+        <link rel="shortcut icon" href="/public/favico.ico" />
         <meta
           name="description"
           content="Aqui você encontra todas as informações sobre seus herois favoritos"
