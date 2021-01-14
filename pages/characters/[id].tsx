@@ -51,15 +51,6 @@ const Character: React.FC<CharacterProps> = () => {
 
   return (
     <>
-      <Head>
-        <title>{"Marvel - Herois & Quadrinhos"}</title>
-        <link rel="shortcut icon" href="/favicon.ico" />
-        <meta
-          name="description"
-          content="Aqui você encontra todas as informações sobre seus herois favoritos"
-        />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-      </Head>
       <div className="flex flex-col items-center justify-start min-h-screen bg-gray-100">
         <div className="p-4 m-8 bg-red-600 rounded shadow-md">
           <img

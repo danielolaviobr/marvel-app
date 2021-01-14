@@ -34,6 +34,7 @@ const Header: React.FC = () => {
     <Box className="flex flex-row items-center h-16 min-w-full pl-4 bg-red-600 shadow-md">
       {isLargerThanPhone ? (
         <>
+          <div></div>
           <HeaderItem to="/">Home</HeaderItem>
           <HeaderItem to="/characters">Personagens</HeaderItem>
           <HeaderItem to="/comics">Quadrinhos</HeaderItem>
