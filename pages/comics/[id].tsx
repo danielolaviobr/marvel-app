@@ -8,18 +8,16 @@ interface CharacterProps {
   id: number;
 }
 
-const Character: React.FC<CharacterProps> = () => {
-  const [character, setCharacter] = useState<any>();
-  const [comics, setComics] = useState([]);
-  const [series, setSeries] = useState([]);
-  const [stories, setStories] = useState([]);
+const Comic: React.FC<CharacterProps> = () => {
+  const [comic, setComic] = useState<any>();
+  const [creators, setCreators] = useState([]);
   const router = useRouter();
 
   const fetchCharacterData = useCallback(async (id: string) => {
     const url = process.env.NEXT_PUBLIC_ENV_URL;
-    const response = await axios.get(`${url}api/characters/${id}`);
+    const response = await axios.get(`${url}api/comics/${id}`);
 
-    setCharacter(response.data.results[0]);
+    setComic(response.data.results[0]);
   }, []);
 
   useEffect(() => {
@@ -28,24 +26,15 @@ const Character: React.FC<CharacterProps> = () => {
   }, [router]);
 
   useEffect(() => {
-    if (character) {
-      const comicsArray = character.comics.items.map(
-        (item: { name: string }) => item.name
+    if (comic) {
+      const creatorsArray = comic.creators.items.map(
+        (item: { name: string; role: string }) => `${item.name} - ${item.role}`
       );
-      const seriesArray = character.series.items.map(
-        (item: { name: string }) => item.name
-      );
-      const storiesArray = character.stories.items.map(
-        (item: { name: string }) => item.name
-      );
-
-      setStories(storiesArray);
-      setSeries(seriesArray);
-      setComics(comicsArray);
+      setCreators(creatorsArray);
     }
-  }, [character]);
+  }, [comic]);
 
-  if (!character) {
+  if (!comic) {
     return <div className=""></div>;
   }
 
@@ -64,21 +53,22 @@ const Character: React.FC<CharacterProps> = () => {
         <div className="p-4 m-8 bg-red-600 rounded shadow-md">
           <img
             className="shadow-md"
-            src={`${character.thumbnail.path}.${character.thumbnail.extension}`}
-            alt={character.name}
+            src={`${comic.thumbnail.path}.${comic.thumbnail.extension}`}
+            alt={comic.name}
             width={250}
             height={250}
           />
         </div>
-        <h1 className="text-4xl font-bold">{character.name}</h1>
-        <div className="flex flex-wrap items-start justify-center max-w-6xl ">
-          <InfoCard title="Quadrinhos" items={comics} />
-          <InfoCard title="Séries" items={series} />
-          <InfoCard title="Aparições" items={stories} />
+        <h1 className="mx-4 text-4xl font-bold text-center">{comic.title}</h1>
+        <div className="flex flex-wrap items-start justify-center max-w-6xl">
+          <div className="flex items-center justify-center mx-8 mt-8 text-center">
+            <p>{comic.description}</p>
+          </div>
+          <InfoCard title="Criadores" items={creators} />
         </div>
       </div>
     </>
   );
 };
 
-export default Character;
+export default Comic;
